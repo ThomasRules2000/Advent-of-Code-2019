@@ -10,10 +10,19 @@ type Output1 = Int
 type Output2 = Int
 
 parser :: String -> Input
-parser = undefined
+parser = map read . lines
 
 part1 :: Input -> Output1
-part1 nums = undefined
+part1 = sum . map requiredFuel
+
+requiredFuel :: Int -> Int
+requiredFuel = subtract 2 . flip div 3
 
 part2 :: Input -> Output2
-part2 nums = undefined
+part2 = sum . map fuelCalc
+
+fuelCalc :: Int -> Int
+fuelCalc x
+    | fuel <= 0 = 0
+    | otherwise = fuel + fuelCalc fuel
+    where fuel = requiredFuel x
